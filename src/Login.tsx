@@ -3,21 +3,26 @@ import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom"; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.css";
 import { validateEmail, validatePassword } from "./validations";
 
-export const Login: React.FC = () => {
+interface Errors {
+  email?: string;
+  password?: string;
+}
+
+const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState<Errors>({});
+  const history = useHistory(); 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let formErrors: { email?: string; password?: string } = {};
+    let formErrors: Errors = {};
 
     if (!validateEmail(email)) {
       formErrors.email = "Invalid email format";
@@ -31,7 +36,7 @@ export const Login: React.FC = () => {
 
     if (Object.keys(formErrors).length === 0) {
       console.log("Login Successful:", { email, password });
-      // Navigate to another page if needed
+      history.push("/dashboard"); 
     }
   };
 
@@ -43,7 +48,7 @@ export const Login: React.FC = () => {
 
         {/* Right Side - Login Form */}
         <div className="col-md-6 d-flex align-items-center justify-content-center">
-          <div className="login-box p-4 rounded shadow bg-white">
+          <div className="login-box p-4 ">
             <h2 className="text">
               Welcome to <span className="text-success">LOREM</span>
             </h2>
@@ -62,7 +67,7 @@ export const Login: React.FC = () => {
               </button>
             </div>
 
-            {/* ✅ Form with Custom Validations */}
+            {/*  Form with Custom Validations */}
             <form onSubmit={handleSubmit}>
               {/* Email Field */}
               <div className="mb-4 text-start">
@@ -88,8 +93,8 @@ export const Login: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <span
-                  className="eye-icon position-absolute end-0 me-3"
-                  style={{ cursor: "pointer" }}
+                  className="eye-icons position-absolute "
+                 
                   onClick={() => setPasswordVisible(!passwordVisible)}
                 >
                   {passwordVisible ? <FaEye /> : <FaEyeSlash />}
@@ -116,7 +121,7 @@ export const Login: React.FC = () => {
               <span
                 className="signup-text text-primary text-decoration-none"
                 style={{ cursor: "pointer" }}
-                onClick={() => navigate("/signup")}
+                onClick={() => history.push("/signup")}
               >
                 Sign up
               </span>
@@ -125,8 +130,7 @@ export const Login: React.FC = () => {
         </div>
       </div>
     </div>
-    // <div>Hi</div>
   );
 };
 
-
+export default Login;

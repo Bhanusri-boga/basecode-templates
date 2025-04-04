@@ -1,0 +1,31 @@
+.sign-box {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 450px;  
+    border-radius: 30px;  
+    background-color: #FFFFFFBF;
+  }
+.contact{
+    margin-left: 8.7rem;
+}
+.eye-icon{
+    top:40%;
+    right:10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: gray;
+  
+  }
+.signin-text{
+    cursor: pointer;
+    margin-Left: 5px;
+  }
+
+  .signup-button {
+    background-color: #779341;
+  }
+  
+  .signup-button:hover {
+    background-color: #45a049;
+  }
+  

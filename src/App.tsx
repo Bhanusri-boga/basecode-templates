@@ -1,10 +1,10 @@
 import React from 'react';
-import { Login } from './Login';
+import Routes from './app.routes';
 
 const App: React.FC = () => {
   return (
     <div>
-      <Login/>
+      <Routes />
     </div>
   );
 };
